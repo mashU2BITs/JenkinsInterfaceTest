@@ -59,13 +59,14 @@
             this.buttonSaveCOnfig = new System.Windows.Forms.Button();
             this.buttonGetFIles = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewValues)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonAddSite
             // 
             this.buttonAddSite.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonAddSite.Location = new System.Drawing.Point(14, 275);
+            this.buttonAddSite.Location = new System.Drawing.Point(12, 306);
             this.buttonAddSite.Name = "buttonAddSite";
             this.buttonAddSite.Size = new System.Drawing.Size(160, 31);
             this.buttonAddSite.TabIndex = 0;
@@ -77,17 +78,17 @@
             // 
             this.listBoxSiteList.FormattingEnabled = true;
             this.listBoxSiteList.ItemHeight = 15;
-            this.listBoxSiteList.Location = new System.Drawing.Point(14, 37);
+            this.listBoxSiteList.Location = new System.Drawing.Point(12, 73);
             this.listBoxSiteList.Name = "listBoxSiteList";
-            this.listBoxSiteList.Size = new System.Drawing.Size(678, 229);
+            this.listBoxSiteList.Size = new System.Drawing.Size(703, 229);
             this.listBoxSiteList.TabIndex = 1;
             // 
             // buttonRemSite
             // 
             this.buttonRemSite.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonRemSite.Location = new System.Drawing.Point(14, 317);
+            this.buttonRemSite.Location = new System.Drawing.Point(13, 340);
             this.buttonRemSite.Name = "buttonRemSite";
-            this.buttonRemSite.Size = new System.Drawing.Size(135, 26);
+            this.buttonRemSite.Size = new System.Drawing.Size(97, 26);
             this.buttonRemSite.TabIndex = 0;
             this.buttonRemSite.Text = "Remove Data";
             this.buttonRemSite.UseVisualStyleBackColor = true;
@@ -95,18 +96,18 @@
             // 
             // buttonLoadSite
             // 
-            this.buttonLoadSite.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonLoadSite.Location = new System.Drawing.Point(818, 18);
+            this.buttonLoadSite.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonLoadSite.Location = new System.Drawing.Point(935, 18);
             this.buttonLoadSite.Name = "buttonLoadSite";
-            this.buttonLoadSite.Size = new System.Drawing.Size(211, 55);
+            this.buttonLoadSite.Size = new System.Drawing.Size(94, 55);
             this.buttonLoadSite.TabIndex = 0;
-            this.buttonLoadSite.Text = "Run Command";
+            this.buttonLoadSite.Text = "Command line option";
             this.buttonLoadSite.UseVisualStyleBackColor = true;
             this.buttonLoadSite.Click += new System.EventHandler(this.buttonLoadSite_Click);
             // 
             // textBoxSite
             // 
-            this.textBoxSite.Location = new System.Drawing.Point(173, 282);
+            this.textBoxSite.Location = new System.Drawing.Point(177, 318);
             this.textBoxSite.Name = "textBoxSite";
             this.textBoxSite.Size = new System.Drawing.Size(470, 23);
             this.textBoxSite.TabIndex = 2;
@@ -115,7 +116,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(176, 267);
+            this.label1.Location = new System.Drawing.Point(174, 303);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(202, 15);
             this.label1.TabIndex = 3;
@@ -123,9 +124,9 @@
             // 
             // richTextBoxData
             // 
-            this.richTextBoxData.Location = new System.Drawing.Point(12, 385);
+            this.richTextBoxData.Location = new System.Drawing.Point(8, 407);
             this.richTextBoxData.Name = "richTextBoxData";
-            this.richTextBoxData.Size = new System.Drawing.Size(1021, 366);
+            this.richTextBoxData.Size = new System.Drawing.Size(1021, 344);
             this.richTextBoxData.TabIndex = 4;
             this.richTextBoxData.Text = "";
             // 
@@ -134,15 +135,15 @@
             this.comboBoxSiteList.FormattingEnabled = true;
             this.comboBoxSiteList.Items.AddRange(new object[] {
             "http://ubcli2:8080/"});
-            this.comboBoxSiteList.Location = new System.Drawing.Point(65, 9);
+            this.comboBoxSiteList.Location = new System.Drawing.Point(63, 45);
             this.comboBoxSiteList.Name = "comboBoxSiteList";
-            this.comboBoxSiteList.Size = new System.Drawing.Size(627, 23);
+            this.comboBoxSiteList.Size = new System.Drawing.Size(652, 23);
             this.comboBoxSiteList.TabIndex = 5;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 14);
+            this.label2.Location = new System.Drawing.Point(13, 50);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 15);
             this.label2.TabIndex = 6;
@@ -212,7 +213,7 @@
             // textBoxFinalString
             // 
             this.textBoxFinalString.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxFinalString.Location = new System.Drawing.Point(77, 352);
+            this.textBoxFinalString.Location = new System.Drawing.Point(73, 9);
             this.textBoxFinalString.Name = "textBoxFinalString";
             this.textBoxFinalString.Size = new System.Drawing.Size(753, 29);
             this.textBoxFinalString.TabIndex = 2;
@@ -221,7 +222,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(14, 360);
+            this.label6.Location = new System.Drawing.Point(10, 17);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(55, 15);
             this.label6.TabIndex = 3;
@@ -230,9 +231,9 @@
             // buttonPreLoad
             // 
             this.buttonPreLoad.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonPreLoad.Location = new System.Drawing.Point(836, 351);
+            this.buttonPreLoad.Location = new System.Drawing.Point(825, 8);
             this.buttonPreLoad.Name = "buttonPreLoad";
-            this.buttonPreLoad.Size = new System.Drawing.Size(79, 33);
+            this.buttonPreLoad.Size = new System.Drawing.Size(79, 30);
             this.buttonPreLoad.TabIndex = 0;
             this.buttonPreLoad.Text = "PreLoad";
             this.buttonPreLoad.UseVisualStyleBackColor = true;
@@ -241,22 +242,22 @@
             // buttonLoadFile
             // 
             this.buttonLoadFile.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonLoadFile.Location = new System.Drawing.Point(921, 349);
+            this.buttonLoadFile.Location = new System.Drawing.Point(840, 323);
             this.buttonLoadFile.Name = "buttonLoadFile";
-            this.buttonLoadFile.Size = new System.Drawing.Size(108, 25);
+            this.buttonLoadFile.Size = new System.Drawing.Size(189, 25);
             this.buttonLoadFile.TabIndex = 0;
-            this.buttonLoadFile.Text = "Load XML ";
+            this.buttonLoadFile.Text = "Load XML into gridview -->";
             this.buttonLoadFile.UseVisualStyleBackColor = true;
             this.buttonLoadFile.Click += new System.EventHandler(this.buttonLoadFile_Click);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(723, 261);
+            this.label8.Location = new System.Drawing.Point(16, 389);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(60, 15);
+            this.label8.Size = new System.Drawing.Size(126, 15);
             this.label8.TabIndex = 10;
-            this.label8.Text = "File Name";
+            this.label8.Text = "Set File Name here -->\r\n";
             this.label8.Click += new System.EventHandler(this.label7_Click);
             // 
             // saveFileDialog1
@@ -266,7 +267,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(935, 257);
+            this.button1.Location = new System.Drawing.Point(338, 384);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(94, 24);
             this.button1.TabIndex = 0;
@@ -276,9 +277,9 @@
             // 
             // textBoxFileName
             // 
-            this.textBoxFileName.Location = new System.Drawing.Point(789, 258);
+            this.textBoxFileName.Location = new System.Drawing.Point(143, 385);
             this.textBoxFileName.Name = "textBoxFileName";
-            this.textBoxFileName.Size = new System.Drawing.Size(140, 23);
+            this.textBoxFileName.Size = new System.Drawing.Size(196, 23);
             this.textBoxFileName.TabIndex = 11;
             this.textBoxFileName.Text = "Jkns";
             // 
@@ -291,11 +292,11 @@
             this.dataGridViewValues.AllowUserToAddRows = false;
             this.dataGridViewValues.AllowUserToDeleteRows = false;
             this.dataGridViewValues.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewValues.Location = new System.Drawing.Point(1039, 9);
+            this.dataGridViewValues.Location = new System.Drawing.Point(1033, 9);
             this.dataGridViewValues.Name = "dataGridViewValues";
             this.dataGridViewValues.ReadOnly = true;
             this.dataGridViewValues.RowTemplate.Height = 25;
-            this.dataGridViewValues.Size = new System.Drawing.Size(836, 745);
+            this.dataGridViewValues.Size = new System.Drawing.Size(842, 745);
             this.dataGridViewValues.TabIndex = 12;
             this.dataGridViewValues.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewValues_CellClick);
             // 
@@ -304,7 +305,7 @@
             this.comboBoxXMLFiles.FormattingEnabled = true;
             this.comboBoxXMLFiles.Items.AddRange(new object[] {
             "C:\\temp\\33TestFile.xml"});
-            this.comboBoxXMLFiles.Location = new System.Drawing.Point(180, 325);
+            this.comboBoxXMLFiles.Location = new System.Drawing.Point(180, 349);
             this.comboBoxXMLFiles.Name = "comboBoxXMLFiles";
             this.comboBoxXMLFiles.Size = new System.Drawing.Size(849, 23);
             this.comboBoxXMLFiles.TabIndex = 5;
@@ -312,7 +313,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(721, 309);
+            this.label7.Location = new System.Drawing.Point(698, 333);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(90, 15);
             this.label7.TabIndex = 10;
@@ -322,9 +323,9 @@
             // buttonSaveCOnfig
             // 
             this.buttonSaveCOnfig.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonSaveCOnfig.Location = new System.Drawing.Point(818, 148);
+            this.buttonSaveCOnfig.Location = new System.Drawing.Point(790, 244);
             this.buttonSaveCOnfig.Name = "buttonSaveCOnfig";
-            this.buttonSaveCOnfig.Size = new System.Drawing.Size(211, 29);
+            this.buttonSaveCOnfig.Size = new System.Drawing.Size(137, 29);
             this.buttonSaveCOnfig.TabIndex = 0;
             this.buttonSaveCOnfig.Text = "Save Config";
             this.buttonSaveCOnfig.UseVisualStyleBackColor = true;
@@ -333,33 +334,44 @@
             // buttonGetFIles
             // 
             this.buttonGetFIles.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonGetFIles.Location = new System.Drawing.Point(862, 299);
+            this.buttonGetFIles.Location = new System.Drawing.Point(689, 307);
             this.buttonGetFIles.Name = "buttonGetFIles";
-            this.buttonGetFIles.Size = new System.Drawing.Size(167, 25);
+            this.buttonGetFIles.Size = new System.Drawing.Size(137, 25);
             this.buttonGetFIles.TabIndex = 0;
-            this.buttonGetFIles.Text = "Scrub Dir for FIiles";
+            this.buttonGetFIles.Text = "Refresh Files in List";
             this.buttonGetFIles.UseVisualStyleBackColor = true;
             this.buttonGetFIles.Click += new System.EventHandler(this.buttonGetFIles_Click);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(723, 284);
+            this.label9.Location = new System.Drawing.Point(717, 375);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(254, 15);
+            this.label9.Size = new System.Drawing.Size(310, 15);
             this.label9.TabIndex = 10;
-            this.label9.Text = "Must contain \'agent,run,detailedjob,rundetails\'";
+            this.label9.Text = "File Name must contain \'agent,run,detailedjob,rundetails\'";
             this.label9.Click += new System.EventHandler(this.label7_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(434, 389);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(232, 15);
+            this.label10.TabIndex = 10;
+            this.label10.Text = "Saves the info below into a file of any type.";
+            this.label10.Click += new System.EventHandler(this.label7_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1874, 811);
+            this.ClientSize = new System.Drawing.Size(1899, 811);
             this.Controls.Add(this.dataGridViewValues);
             this.Controls.Add(this.textBoxFileName);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label9);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -426,5 +438,6 @@
         private System.Windows.Forms.Button buttonSaveCOnfig;
         private System.Windows.Forms.Button buttonGetFIles;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
     }
 }
