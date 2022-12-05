@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="JenkinsInterfaceTest.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="CommandList" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">job/Job_Build_Master_calc/build,job/Job_Build_Master_calc/LastStableBuild/api/xml/,job/Job_Build_Master_calc/api/xml/,job/api/xml/,manage/computer/,manage/computer/windowagent1/builds/,view/all/api/xml?tree=jobs[name],views[name,jobs[name]],job/Job_Build_Master_calc/33/logText/progressiveText?start=0,job/Job_Build_Master_calc/##/api/xml/</Value>
-    </Setting>
     <Setting Name="userName" Type="System.String" Scope="Application">
       <Value Profile="(Default)">jenkins</Value>
     </Setting>

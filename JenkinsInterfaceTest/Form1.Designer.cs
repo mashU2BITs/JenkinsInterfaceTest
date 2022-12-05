@@ -111,7 +111,7 @@
             this.textBoxSite.Name = "textBoxSite";
             this.textBoxSite.Size = new System.Drawing.Size(470, 23);
             this.textBoxSite.TabIndex = 2;
-            this.textBoxSite.Text = "job/Job_Build_Master_calc/api/xml?tree=jobs[name],views[name,jobs[name]]";
+            this.textBoxSite.Text = "job/Job_Build_Master_calc/api/xml";
             // 
             // label1
             // 
@@ -133,8 +133,6 @@
             // comboBoxSiteList
             // 
             this.comboBoxSiteList.FormattingEnabled = true;
-            this.comboBoxSiteList.Items.AddRange(new object[] {
-            "http://ubcli2:8080/"});
             this.comboBoxSiteList.Location = new System.Drawing.Point(63, 45);
             this.comboBoxSiteList.Name = "comboBoxSiteList";
             this.comboBoxSiteList.Size = new System.Drawing.Size(652, 23);
@@ -171,7 +169,6 @@
             this.textBoxUserName.Name = "textBoxUserName";
             this.textBoxUserName.Size = new System.Drawing.Size(239, 23);
             this.textBoxUserName.TabIndex = 9;
-            this.textBoxUserName.Text = "jenkins";
             // 
             // label4
             // 
@@ -188,7 +185,6 @@
             this.textBoxToken.Name = "textBoxToken";
             this.textBoxToken.Size = new System.Drawing.Size(239, 23);
             this.textBoxToken.TabIndex = 9;
-            this.textBoxToken.Text = "11812367e96a53ffe4324f6a469d132a92";
             // 
             // label5
             // 

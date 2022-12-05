@@ -25,15 +25,6 @@ namespace JenkinsInterfaceTest.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"job/Job_Build_Master_calc/build,job/Job_Build_Master_calc/LastStableBuild/api/xml/,job/Job_Build_Master_calc/api/xml/,job/api/xml/,manage/computer/,manage/computer/windowagent1/builds/,view/all/api/xml?tree=jobs[name],views[name,jobs[name]],job/Job_Build_Master_calc/33/logText/progressiveText?start=0,job/Job_Build_Master_calc/##/api/xml/")]
-        public string CommandList {
-            get {
-                return ((string)(this["CommandList"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("jenkins")]
         public string userName {
             get {

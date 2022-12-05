@@ -31,15 +31,7 @@ namespace JenkinsInterfaceTest
             RefreshFilesFromDisk();
             comboBoxXMLFiles.SelectedIndex = 0;
             panelpassFail.BackColor = Color.Green;
-            List<string> codepaths = new List<string>();
-            codepaths.AddRange(settings.CommandList.Split(','));
-            foreach (var item in codepaths)
-            {
-                if (!string.IsNullOrWhiteSpace(item))
-                {
-                    listBoxSiteList.Items.Add(item);
-                }
-            }
+           
         }
 
         private void LoadSettings()
@@ -51,23 +43,23 @@ namespace JenkinsInterfaceTest
                     // load configuration data to save in the application.ini
                     AppInitData aid = new AppInitData();
                     aid = aid.ReadFromDisk(settings.ConfigFile);
-                    var sitelistitemstosave = settings.CommandList.Split(',').ToArray();
+                    var sitelistitemstosave = aid.commandlist.Split(';').ToArray();
                     foreach (var item in sitelistitemstosave)
                     {
                         if (!string.IsNullOrEmpty(item))
                         {
-                            listBoxSiteList.Items.AddRange(sitelistitemstosave);
+                            listBoxSiteList.Items.Add(item);
                         }
                     }
                    
                     textBoxUserName.Text = aid.username;
                     textBoxToken.Text = aid.token;
-                    var SitePathItemstoSave = aid.defaultsitepath.Split(',').ToArray();
+                    var SitePathItemstoSave = aid.defaultsitepath.Split(';').ToArray();
                     foreach (var item in SitePathItemstoSave)
                     {
                         if (!string.IsNullOrEmpty(item))
                         {
-                            comboBoxSiteList.Items.Add(aid.defaultsitepath);
+                            comboBoxSiteList.Items.Add(item);
                         }
                     }              
                 }                
@@ -533,14 +525,14 @@ namespace JenkinsInterfaceTest
             string sitepathitemstosave = "";
             foreach (string item in listBoxSiteList.Items)
             {
-                sitelistitemstosave = string.Format("{0},{1}", sitelistitemstosave,item);
+                sitelistitemstosave = string.Format("{0};{1}", sitelistitemstosave,item);
             }
             aid.commandlist = sitelistitemstosave;
             aid.username = textBoxUserName.Text;
             aid.token = textBoxToken.Text;
             foreach (string item in comboBoxSiteList.Items)
             {
-                sitepathitemstosave = string.Format("{0},{1}", sitepathitemstosave, item);
+                sitepathitemstosave = string.Format("{0};{1}", sitepathitemstosave, item);
             }
             aid.defaultsitepath = sitepathitemstosave;
             aid.WriteToDisk(aid,settings.ConfigFile);
