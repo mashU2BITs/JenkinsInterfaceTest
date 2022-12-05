@@ -297,7 +297,7 @@
             this.dataGridViewValues.RowTemplate.Height = 25;
             this.dataGridViewValues.Size = new System.Drawing.Size(836, 745);
             this.dataGridViewValues.TabIndex = 12;
-            this.dataGridViewValues.AutoResizeColumns(System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            this.dataGridViewValues.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewValues_CellClick);
             // 
             // comboBoxXMLFiles
             // 

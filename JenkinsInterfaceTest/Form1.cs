@@ -19,7 +19,8 @@ namespace JenkinsInterfaceTest
     public partial class MainForm : Form
     {
         private static Properties.Settings settings = new Properties.Settings();
-       // private string clay's token = "11812367e96a53ffe4324f6a469d132a92";
+        // private string clay's token = "11812367e96a53ffe4324f6a469d132a92";
+        private static string HTTPResponse = "";
         public MainForm()
         {
             InitializeComponent();
@@ -76,6 +77,12 @@ namespace JenkinsInterfaceTest
 
         private void buttonAuth_Click(object sender, EventArgs e)
         {
+            HTTPPOST();
+
+        }
+
+        private void HTTPPOST()
+        {
             richTextBoxData.Clear();
             try
             {
@@ -93,9 +100,67 @@ namespace JenkinsInterfaceTest
             {
                 richTextBoxData.AppendText(ex.ToString());
             }
-            
         }
 
+        private void HTTPPOST(string command)
+        {
+            richTextBoxData.Clear();
+            try
+            {
+                string uridata = string.Format("{0}{1}",comboBoxSiteList.Text,command);
+                HttpWebRequest foo = CreateHttpRequest(uridata);
+
+                var httpResponse = (HttpWebResponse)foo.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var responseText = streamReader.ReadToEnd();
+                    richTextBoxData.AppendText(responseText);
+                    HTTPResponse = responseText.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                richTextBoxData.AppendText(ex.ToString());
+            }
+        }
+        private string HTTPPOSTRunInfo(string RunName, int runId)
+        {
+            richTextBoxData.Clear();
+           
+            try
+            {
+                string uridata = string.Format("{0}job/{1}/{2}/", comboBoxSiteList.Text, RunName,runId);
+                HttpWebRequest foo = CreateHttpRequest(uridata);
+
+                var httpResponse = (HttpWebResponse)foo.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    string responseText = streamReader.ReadToEnd();
+                    richTextBoxData.AppendText(responseText);
+                    HTTPResponse = responseText.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                richTextBoxData.AppendText(ex.ToString());
+            }
+            return HTTPResponse;
+        }
+        private void dataGridViewValues_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridViewValues.CurrentCell.ColumnIndex.Equals(3) && e.RowIndex != -1)
+            {
+                if (dataGridViewValues.CurrentCell != null && dataGridViewValues.CurrentCell.Value != null)
+                {
+                    //do work
+                    string runname = dataGridViewValues.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    int runid = Convert.ToInt32( dataGridViewValues.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
+                    string foobar = HTTPPOSTRunInfo(runname,runid);
+
+                }
+            }
+        }
+         
         private string runcommand (string command)
         {
             Process process = new Process();
@@ -135,7 +200,7 @@ namespace JenkinsInterfaceTest
             {
                 textBoxFinalString.Text = string.Format(@"{0}{1}", comboBoxSiteList.SelectedItem.ToString(), listBoxSiteList.SelectedItem.ToString());
             }
-            catch (Exception ex)
+            catch (Exception)
             {
              
             }
@@ -167,10 +232,6 @@ namespace JenkinsInterfaceTest
         private void buttonLoadFile_Click(object sender, EventArgs e)
         {
             richTextBoxData.Clear();
-            DataSet ds = new DataSet();
-            DataTable dt = new DataTable();
-            ds.Tables.Add(dt);
-            XmlDocument doc = new XmlDocument();
             if (!string.IsNullOrEmpty(@comboBoxXMLFiles.Text.ToString()))
             {
                 string tempLocation = @comboBoxXMLFiles.Text.ToString().ToLower();
@@ -178,19 +239,19 @@ namespace JenkinsInterfaceTest
                 {
                     if (tempLocation.Contains("agent"))
                     {
-                        ProcessAgentInfo(ds, dt, @tempLocation);
+                        ProcessAgentInfo(@tempLocation);
                     }
-                    else if (tempLocation.Contains("run"))
+                    else if (tempLocation.Contains("project"))
                     {
-                        ProcessRunData(ds, dt, @tempLocation);
+                        ProcessRunData(@tempLocation);
                     }
                     else if (tempLocation.Contains("detailedjob"))
                     {
-                        ProcessDetailedRunData(ds, dt, @tempLocation);
+                        ProcessDetailedRunData(@tempLocation);
                     }
                     else if (tempLocation.Contains("rundetails"))
                     {
-                        ProcessDetailedRunData(ds, dt, @tempLocation);
+                        ProcessDetailedRunData(@tempLocation);
                     }
                 }
                 else
@@ -200,8 +261,11 @@ namespace JenkinsInterfaceTest
             }
         }
 
-        private void ProcessAgentInfo( DataSet ds, DataTable dt,  string filename)
+        private void ProcessAgentInfo(string filename)
         {
+            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
+            ds.Tables.Add(dt);
             AgentStatus aas = new AgentStatus();
             XmlDocument doc = new XmlDocument();
                 doc.Load(filename);
@@ -249,10 +313,21 @@ namespace JenkinsInterfaceTest
             
             dt.Rows.Add(aas.displayName, aas.offline, aas.availableSwapSpace, aas.availablePhysicalMemory, aas.totalSwapSpace, aas.totalPhysicalMemory);
             dataGridViewValues.DataSource = ds.Tables[0];
+            if (aas.offline)
+            {
+                dataGridViewValues.Rows[0].Cells[2].Style.BackColor = Color.Red;
+            }
+            else
+            {
+                dataGridViewValues.Rows[0].Cells[2].Style.BackColor = Color.Green;
+            }
         }
 
-        private void ProcessRunData( DataSet ds, DataTable dt, string filename)
+        private void ProcessRunData( string filename)
         {
+            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
+            ds.Tables.Add(dt);
             RunResults rr = new RunResults();
             XmlDocument doc = new XmlDocument();
             doc.Load(filename);
@@ -307,9 +382,28 @@ namespace JenkinsInterfaceTest
             } // end for each now load line for dataset.
             dt.Rows.Add(rr.BuildNumMain, rr.BuiltOn, rr.In_Progress.ToString(), rr.Result.ToString(), rr.Url);
             dataGridViewValues.DataSource = ds.Tables[0];
+            if (rr.result)
+            {
+                dataGridViewValues.Rows[0].Cells[3].Style.BackColor = Color.Green;
+            }
+            else
+            {
+                dataGridViewValues.Rows[0].Cells[3].Style.BackColor = Color.Red;
+            }
+            if (rr.in_progress)
+            {
+                dataGridViewValues.Rows[0].Cells[2].Style.BackColor = Color.Green;
+            }
+            else
+            {
+                dataGridViewValues.Rows[0].Cells[2].Style.BackColor = Color.Red;
+            }
         }
-        private void ProcessDetailedRunData(DataSet ds, DataTable dt, string filename)
+        private void ProcessDetailedRunData(string filename)
         {
+            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
+            ds.Tables.Add(dt);
             string runName = "";
             string fullName = "";
             List <string> runUrls = new List<string>();
@@ -348,6 +442,49 @@ namespace JenkinsInterfaceTest
             }
             dataGridViewValues.DataSource = ds.Tables[0];
         }
+        private void ProcessDetailedProjectData(string filename)
+        {
+            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
+            ds.Tables.Add(dt);
+            string runName = "";
+            string fullName = "";
+            List<string> runUrls = new List<string>();
+            List<int> runIDs = new List<int>();
+            RunResults rr = new RunResults();
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filename);
+            dt.TableName = "Detailed_Project_Info";
+            dt.Columns.Add("Display_Name", typeof(string));
+            dt.Columns.Add("FullName", typeof(string));
+            dt.Columns.Add("Run_ID", typeof(int));
+            dt.Columns.Add("Run_Url", typeof(string));
+            foreach (XmlNode nod in doc.DocumentElement.ChildNodes)
+            {
+                switch (nod.Name.ToLowerInvariant())
+                {
+                    case "displayname":
+                        runName = nod.InnerText;
+                        break;
+                    case "fullname":
+                        fullName = nod.InnerText;
+                        break;
+                    case "build":
+                        runIDs.Add(Convert.ToInt32(nod.ChildNodes[0].InnerText));
+                        runUrls.Add(nod.ChildNodes[1].InnerText);
+                        break;
+                    default:
+                        break;
+                }
+            } // end for each now load line for dataset.
+            for (int i = 0; i < runIDs.Count; i++)
+            {
+                //var tetst = HttpUtility.UrlPathEncode(runIDs[i].ToString());
+                //string tempwebUrl = string.Format("{0}", HttpUtility.UrlPathEncode(runIDs[i].ToString()));
+                dt.Rows.Add(runName, fullName, runIDs[i], HttpUtility.UrlPathEncode(runUrls[i].ToString()));
+            }
+            dataGridViewValues.DataSource = ds.Tables[0];
+        }
         private void buttonSaveCOnfig_Click(object sender, EventArgs e)
         {
             // load configuration data to save in the application.ini
@@ -355,7 +492,7 @@ namespace JenkinsInterfaceTest
             string sitelistitemstosave = "";
             foreach (var item in listBoxSiteList.Items)
             {
-                sitelistitemstosave = string.Format("{},{}", sitelistitemstosave,item);
+                sitelistitemstosave = string.Format("{0},{1}", sitelistitemstosave,item);
             }
             aid.commandlist = sitelistitemstosave;
             aid.WriteToDisk(aid,settings.ConfigFile);
@@ -371,6 +508,8 @@ namespace JenkinsInterfaceTest
             comboBoxXMLFiles.Items.Clear();
             comboBoxXMLFiles.Items.AddRange(di.GetFiles("*.xml"));
         }
+
+     
     }
 
 }
