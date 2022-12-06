@@ -92,18 +92,23 @@ namespace JenkinsInterfaceTest
 
             //Creating HTTP web request
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(URLName);
+            try
+            {
+                httpWebRequest.ContentType = "application/x-www-form-urlencoded";
+                httpWebRequest.Method = "POST";
 
-            httpWebRequest.ContentType = "application/x-www-form-urlencoded";
-            httpWebRequest.Method = "POST";
+                byte[] credentialBuffer =
+                    new UTF8Encoding().GetBytes(textBoxUserName.Text + ":" + textBoxToken.Text);
 
-            byte[] credentialBuffer =
-                new UTF8Encoding().GetBytes(textBoxUserName.Text + ":" + textBoxToken.Text);
+                httpWebRequest.Headers["Authorization"] =
+                   "Basic " + Convert.ToBase64String(credentialBuffer);
 
-            httpWebRequest.Headers["Authorization"] =
-               "Basic " + Convert.ToBase64String(credentialBuffer);
-
-            httpWebRequest.PreAuthenticate = true;
-            
+                httpWebRequest.PreAuthenticate = true;
+            }
+            catch (Exception ex)
+            {
+                richTextBoxData.AppendText(ex.ToString());
+            }
             return httpWebRequest;
         }
 
@@ -275,15 +280,15 @@ namespace JenkinsInterfaceTest
                     }
                     else if (tempLocation.Contains("project"))
                     {
-                        ProcessRunData(@tempLocation);
+                        ProcessDetailedProjectData(@tempLocation);
                     }
                     else if (tempLocation.Contains("detailedjob"))
                     {
                         ProcessDetailedRunData(@tempLocation);
                     }
-                    else if (tempLocation.Contains("rundetails"))
+                    else if (tempLocation.Contains("run"))
                     {
-                        ProcessDetailedRunData(@tempLocation);
+                        ProcessRunData(@tempLocation);
                     }
                 }
                 else
