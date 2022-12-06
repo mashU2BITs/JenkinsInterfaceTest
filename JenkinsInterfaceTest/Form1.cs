@@ -401,7 +401,7 @@ namespace JenkinsInterfaceTest
                             rr.Result = true;
                         }
                         break;
-                    case "builtOn":
+                    case "builton":
                         rr.BuiltOn = nod.InnerText;
                         break;
                     case "url":
