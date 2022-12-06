@@ -395,6 +395,8 @@
             this.Controls.Add(this.buttonAddSite);
             this.Name = "MainForm";
             this.Text = "Jenkins Test";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewValues)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

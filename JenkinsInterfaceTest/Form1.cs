@@ -11,6 +11,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Web;
+using System.Reflection.Metadata.Ecma335;
 
 //using BaseClassNameSpace.Web.BaseServices;
 
@@ -29,7 +30,10 @@ namespace JenkinsInterfaceTest
 
             comboBoxSiteList.SelectedIndex = 0;
             RefreshFilesFromDisk();
-            comboBoxXMLFiles.SelectedIndex = 0;
+            if (comboBoxXMLFiles.Items.Count >= 1)
+            {
+                comboBoxXMLFiles.SelectedIndex = 0;
+            }
             panelpassFail.BackColor = Color.Green;
            
         }
@@ -67,10 +71,8 @@ namespace JenkinsInterfaceTest
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-            }
-           
+            }           
         }
-
         private void buttonAddSite_Click(object sender, EventArgs e)
         {
             bool skipper = false;
@@ -86,7 +88,6 @@ namespace JenkinsInterfaceTest
                 listBoxSiteList.Items.Add(textBoxSite.Text);
             }
         }
-
         private  HttpWebRequest CreateHttpRequest(string URLName)
         {
 
@@ -111,13 +112,11 @@ namespace JenkinsInterfaceTest
             }
             return httpWebRequest;
         }
-
         private void buttonAuth_Click(object sender, EventArgs e)
         {
             HTTPPOST();
 
         }
-
         private void HTTPPOST()
         {
             richTextBoxData.Clear();
@@ -138,7 +137,6 @@ namespace JenkinsInterfaceTest
                 richTextBoxData.AppendText(ex.ToString());
             }
         }
-
         private void HTTPPOST(string command)
         {
             richTextBoxData.Clear();
@@ -196,8 +194,7 @@ namespace JenkinsInterfaceTest
 
                 }
             }
-        }
-         
+        }         
         private string runcommand (string command)
         {
             Process process = new Process();
@@ -213,7 +210,6 @@ namespace JenkinsInterfaceTest
             return result.ToString();
 
         }
-
         private void buttonLoadSite_Click(object sender, EventArgs e)
         {
             richTextBoxData.Clear();
@@ -222,32 +218,27 @@ namespace JenkinsInterfaceTest
             var temp = runcommand(foo);
             richTextBoxData.AppendText(foo);
 
-        }
-
-      
+        }      
         private void buttonRemSite_Click(object sender, EventArgs e)
         {
             // int lineIndex = this.GetLineFromCharIndex(cursorPosition);
             // int linenum = richTextBoxData.GetLineFromCharIndex();
         }
-
         private void buttonPreLoad_Click(object sender, EventArgs e)
         {
             try
             {
-                textBoxFinalString.Text = string.Format(@"{0}{1}", comboBoxSiteList.SelectedItem.ToString(), listBoxSiteList.SelectedItem.ToString());
+                textBoxFinalString.Text = string.Format(@"{0}{1}", comboBoxSiteList.SelectedItem.ToString(), listBoxSiteList.Text);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
         }
-
         private void label7_Click(object sender, EventArgs e)
         {
 
         }
-
         private void buttonSaveToFile_Click(object sender, EventArgs e)
         {
             
@@ -265,7 +256,6 @@ namespace JenkinsInterfaceTest
                 comboBoxXMLFiles.Items.Add(fp);
             }
         }
-
         private void buttonLoadFile_Click(object sender, EventArgs e)
         {
             richTextBoxData.Clear();
@@ -286,6 +276,10 @@ namespace JenkinsInterfaceTest
                     {
                         ProcessDetailedRunData(@tempLocation);
                     }
+                    else if (tempLocation.Contains("lastbuild"))
+                    {
+                        ProcessRunData(@tempLocation);
+                    }
                     else if (tempLocation.Contains("run"))
                     {
                         ProcessRunData(@tempLocation);
@@ -297,7 +291,68 @@ namespace JenkinsInterfaceTest
                 }
             }
         }
+        private void ProcessLastBuildData(string filename)
+        {
+            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
+            ds.Tables.Add(dt);
+            AgentStatus aas = new AgentStatus();
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filename);
+            dt.TableName = "LastBuildData";
+            dt.Columns.Add("AgentName", typeof(string));
+            dt.Columns.Add("Building", typeof(bool));
+            dt.Columns.Add("Result", typeof(bool));
+            dt.Columns.Add("AvailSwapSpc", typeof(string));
+            dt.Columns.Add("AvailPhysMem", typeof(string));
+            dt.Columns.Add("TtlSwapSpc", typeof(string));
+            dt.Columns.Add("TtlPhysMem", typeof(string));
 
+
+            // now process xml data and fill class object to display info and other options that are easy with a class
+            foreach (XmlNode nod in doc.DocumentElement.ChildNodes)
+            {
+                switch (nod.Name.ToLower())
+                {
+                    case "displayname":
+                        aas.DisplayName = nod.InnerText.ToString();
+                        break;
+                    case "result":
+                        if (nod.InnerText.ToLower().Equals("false"))
+                        {
+                            aas.Offline = false;
+                        }
+                        else
+                        {
+                            aas.Offline = true;
+                        }
+                        break;
+                    case "monitordata":
+                        XmlNode chnode = nod.ChildNodes[0].ChildNodes[1];
+                        aas.AvailableSwapSpace = chnode.InnerText.ToString();
+                        XmlNode chnode2 = nod.ChildNodes[0].ChildNodes[0];
+                        aas.AvailablePhysicalMemory = chnode2.InnerText.ToString();
+                        XmlNode chnode3 = nod.ChildNodes[0].ChildNodes[3];
+                        aas.TotalSwapSpace = chnode3.InnerText.ToString();
+                        XmlNode chnode4 = nod.ChildNodes[0].ChildNodes[2];
+                        aas.TotalPhysicalMemory = chnode4.InnerText.ToString();
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            dt.Rows.Add(aas.displayName, aas.offline, aas.availableSwapSpace, aas.availablePhysicalMemory, aas.totalSwapSpace, aas.totalPhysicalMemory);
+            dataGridViewValues.DataSource = ds.Tables[0];
+            if (aas.offline)
+            {
+                dataGridViewValues.Rows[0].Cells[2].Style.BackColor = Color.Red;
+            }
+            else
+            {
+                dataGridViewValues.Rows[0].Cells[2].Style.BackColor = Color.Green;
+            }
+        }
         private void ProcessAgentInfo(string filename)
         {
             DataSet ds = new DataSet();
@@ -359,7 +414,6 @@ namespace JenkinsInterfaceTest
                 dataGridViewValues.Rows[0].Cells[2].Style.BackColor = Color.Green;
             }
         }
-
         private void ProcessRunData( string filename)
         {
             DataSet ds = new DataSet();
@@ -408,9 +462,7 @@ namespace JenkinsInterfaceTest
                         rr.Url = nod.InnerText;
                         break;
                     case "timestamp":
-                        long time = Convert.ToInt64(nod.InnerText);
-                        time /= 1000;
-                        DateTime result = DateTimeOffset.FromUnixTimeMilliseconds(time).DateTime;
+                        DateTime result = DateTime.Parse(nod.InnerText);
                         rr.DT  = result;
                         break;
                     default:
@@ -524,24 +576,54 @@ namespace JenkinsInterfaceTest
         }
         private void buttonSaveCOnfig_Click(object sender, EventArgs e)
         {
+            saveConfigData();
+        }
+
+        private void saveConfigData()
+        {
             // load configuration data to save in the application.ini
             AppInitData aid = new AppInitData();
             string sitelistitemstosave = "";
             string sitepathitemstosave = "";
             foreach (string item in listBoxSiteList.Items)
             {
-                sitelistitemstosave = string.Format("{0};{1}", sitelistitemstosave,item);
+                if (listBoxSiteList.Items.Count == 0)
+                {
+                    sitelistitemstosave = item;
+                }
+                else
+                {
+                    sitelistitemstosave = string.Format("{0};{1}", sitelistitemstosave, item);
+                }
             }
             aid.commandlist = sitelistitemstosave;
             aid.username = textBoxUserName.Text;
             aid.token = textBoxToken.Text;
             foreach (string item in comboBoxSiteList.Items)
             {
-                sitepathitemstosave = string.Format("{0};{1}", sitepathitemstosave, item);
+                if (sitepathitemstosave.Count() <= 0)
+                {
+                    sitepathitemstosave =  item;
+                }
+                else
+                {
+                    sitepathitemstosave = string.Format("{0};{1}", sitepathitemstosave, item);
+                }
             }
+        
             aid.defaultsitepath = sitepathitemstosave;
-            aid.WriteToDisk(aid,settings.ConfigFile);
+            if (File.Exists(settings.ConfigFile))
+            {
+                string tempfilename = string.Format("old_{0}", settings.ConfigFile);
+                if (File.Exists(tempfilename))
+                {
+                    File.Delete(tempfilename);
+                }
+                File.Move(settings.ConfigFile, tempfilename);
+            }
+            aid.WriteToDisk(aid, settings.ConfigFile);
         }
+
         private void buttonGetFIles_Click(object sender, EventArgs e)
         {
             RefreshFilesFromDisk();
@@ -554,8 +636,13 @@ namespace JenkinsInterfaceTest
             comboBoxXMLFiles.Items.AddRange(di.GetFiles("*.xml"));
         }
 
-     
-    }
 
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            MessageBox.Show("Saving Config Changes to disk.");
+            saveConfigData();
+
+        }
+    }
 }
 
