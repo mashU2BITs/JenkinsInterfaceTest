@@ -60,6 +60,8 @@
             this.buttonGetFIles = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.buttonSaveToSQL = new System.Windows.Forms.Button();
+            this.buttonReadSql = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewValues)).BeginInit();
             this.SuspendLayout();
             // 
@@ -319,7 +321,7 @@
             // buttonSaveCOnfig
             // 
             this.buttonSaveCOnfig.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonSaveCOnfig.Location = new System.Drawing.Point(790, 244);
+            this.buttonSaveCOnfig.Location = new System.Drawing.Point(790, 153);
             this.buttonSaveCOnfig.Name = "buttonSaveCOnfig";
             this.buttonSaveCOnfig.Size = new System.Drawing.Size(137, 29);
             this.buttonSaveCOnfig.TabIndex = 0;
@@ -358,6 +360,28 @@
             this.label10.Text = "Saves the info below into a file of any type.";
             this.label10.Click += new System.EventHandler(this.label7_Click);
             // 
+            // buttonSaveToSQL
+            // 
+            this.buttonSaveToSQL.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonSaveToSQL.Location = new System.Drawing.Point(869, 288);
+            this.buttonSaveToSQL.Name = "buttonSaveToSQL";
+            this.buttonSaveToSQL.Size = new System.Drawing.Size(137, 29);
+            this.buttonSaveToSQL.TabIndex = 0;
+            this.buttonSaveToSQL.Text = "Sql Write";
+            this.buttonSaveToSQL.UseVisualStyleBackColor = true;
+            this.buttonSaveToSQL.Click += new System.EventHandler(this.buttonSaveToSQL_Click);
+            // 
+            // buttonReadSql
+            // 
+            this.buttonReadSql.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonReadSql.Location = new System.Drawing.Point(869, 244);
+            this.buttonReadSql.Name = "buttonReadSql";
+            this.buttonReadSql.Size = new System.Drawing.Size(137, 29);
+            this.buttonReadSql.TabIndex = 0;
+            this.buttonReadSql.Text = "Sql Read";
+            this.buttonReadSql.UseVisualStyleBackColor = true;
+            this.buttonReadSql.Click += new System.EventHandler(this.buttonReadSql_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -387,6 +411,8 @@
             this.Controls.Add(this.listBoxSiteList);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonLoadSite);
+            this.Controls.Add(this.buttonReadSql);
+            this.Controls.Add(this.buttonSaveToSQL);
             this.Controls.Add(this.buttonSaveCOnfig);
             this.Controls.Add(this.buttonGetFIles);
             this.Controls.Add(this.buttonLoadFile);
@@ -396,7 +422,6 @@
             this.Name = "MainForm";
             this.Text = "Jenkins Test";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
-            
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewValues)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -437,5 +462,7 @@
         private System.Windows.Forms.Button buttonGetFIles;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button buttonSaveToSQL;
+        private System.Windows.Forms.Button buttonReadSql;
     }
 }

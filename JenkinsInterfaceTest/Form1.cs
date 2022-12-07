@@ -6,12 +6,15 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Data.SqlClient;
+using System.Data;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Web;
 using System.Reflection.Metadata.Ecma335;
+using System.Xml.Linq;
 
 //using BaseClassNameSpace.Web.BaseServices;
 
@@ -642,6 +645,129 @@ namespace JenkinsInterfaceTest
             MessageBox.Show("Saving Config Changes to disk.");
             saveConfigData();
 
+        }
+
+        private void buttonSaveToSQL_Click(object sender, EventArgs e)
+        {
+           int runnumber = 33;
+            bool BuildResult = true;
+            string JkAgntName = "claytestauto";
+            string JkURI = "http://ubcli2:8080/";
+            bool buildingStill = false;
+            SaveRunInfoToSql(runnumber,BuildResult,JkAgntName,JkURI,buildingStill);
+        }
+
+        private static void SaveRunInfoToSql(int runnumber, bool BuildResult, string JkAgntName, string JkURI, bool buildingStill)
+        {
+
+            SqlConnection connection = new SqlConnection(settings.ConnString);
+            string sqlCMD = SQLCmd_Build_Info_Insert_Template(runnumber, BuildResult.ToString(), JkAgntName, JkURI, buildingStill);
+            try
+            {    // add query string
+                SqlInsertEntry(connection, sqlCMD);
+            }
+            catch (Exception ex)
+            {
+                // ...handle, rethrow. Also, you might want to catch
+                // more specific exceptions...
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        private static Guid NEWID()
+        {
+            Guid foo = Guid.NewGuid();
+            return foo;
+        }
+
+        private static string SQLCmd_Build_Info_Insert_Template(int runId ,string BuildResult, string JkAgntName, string JkURI, bool buildingStill)
+        {
+            return string.Format("INSERT INTO [dbo].[Build_Info] ([RunInfoID],[BuildId],[BuildResult],[JkAgntName],[JkURI],[BuildingStill]) " +
+                                                        "VALUES ( '{0}', '{1}', '{2}','{3}', '{4}','{5}')",  NEWID(), runId, BuildResult, JkAgntName, @JkURI, buildingStill);
+        }
+
+        private static List<RunResults> SqlRunREsultsQuery(SqlConnection connection, string sqlCMD)
+        {
+           
+            List<RunResults> rrl = new List<RunResults>();
+            using (SqlCommand command = new SqlCommand(sqlCMD, connection))
+            {
+                command.Connection.Open();
+                using (SqlDataReader oReader = command.ExecuteReader())
+                {
+                    while (oReader.Read())
+                    {
+                        for (int i = 0; i < oReader.FieldCount; i++)
+                        {
+                            RunResults rr = new RunResults();
+                            bool tempresult = false;
+                            bool tempprog = false;
+                            rr.BuiltOn = oReader[4].ToString();
+                            rr.BuildNumMain = oReader[1].ToString();
+                            if (!oReader[2].ToString().ToLower().Equals("false"))
+                            {
+                                tempresult = true;
+                            }
+                            rr.result = tempresult;
+                            if (!oReader[3].ToString().ToLower().Equals("false"))
+                            {
+                                tempprog = true;
+                            }
+                            rr.in_progress = tempprog;
+                            rr.url = oReader[5].ToString();
+                            rrl.Add(rr);
+                        }
+                    }
+                    command.Connection.Close();
+
+                }
+                
+            }
+            return rrl;
+        }
+        private static void SqlNonQuery(SqlConnection connection, string sqlCMD)
+        {
+            using (SqlCommand command = new SqlCommand(sqlCMD, connection))
+            {
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+        private static void SqlInsertEntry(SqlConnection connection, string sqlCMD)
+        {
+            using (SqlCommand command = new SqlCommand(sqlCMD, connection))
+            {
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        private void buttonReadSql_Click(object sender, EventArgs e)
+        {
+            dataGridViewValues.Rows.Clear();
+            List<RunResults> RunResList = new List<RunResults>();
+            SqlConnection connection = new SqlConnection(settings.ConnString);
+            string sqlCMD = "SELECT [RunInfoID],[BuildId],[BuildingStill],[BuildResult],[JkAgntName],[JkURI]  FROM [dbo].[Build_Info]";
+            try
+            {    // add query string
+                RunResList = SqlRunREsultsQuery(connection, sqlCMD);
+                dataGridViewValues.DataSource = RunResList;
+                //var foobar = SqlQuery(connection, sqlCMD);
+            }
+            catch (Exception ex)
+            {
+                // ...handle, rethrow. Also, you might want to catch
+                // more specific exceptions...
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
     }
 }

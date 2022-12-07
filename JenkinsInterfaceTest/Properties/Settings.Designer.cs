@@ -49,5 +49,15 @@ namespace JenkinsInterfaceTest.Properties {
                 return ((string)(this["ConfigFile"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=JENKINCLI1\\SQLEXPRESS;Initial Catalog=FlirTest;Integrated Security=Tr" +
+            "ue")]
+        public string ConnString {
+            get {
+                return ((string)(this["ConnString"]));
+            }
+        }
     }
 }
