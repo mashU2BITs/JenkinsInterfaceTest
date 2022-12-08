@@ -28,9 +28,7 @@ namespace JenkinsInterfaceTest
         public MainForm()
         {
             InitializeComponent();
-
             LoadSettings();
-
             comboBoxSiteList.SelectedIndex = 0;
             RefreshFilesFromDisk();
             if (comboBoxXMLFiles.Items.Count >= 1)
@@ -161,6 +159,13 @@ namespace JenkinsInterfaceTest
                 richTextBoxData.AppendText(ex.ToString());
             }
         }
+
+        /// <summary>
+        /// users can click a run ID in the gridview and expect the run info to be returned in xml format to the richtextbox viewer location, or add it to the gridview etc...
+        /// </summary>
+        /// <param name="RunName"></param>
+        /// <param name="runId"></param>
+        /// <returns></returns>
         private string HTTPPOSTRunInfo(string RunName, int runId)
         {
             richTextBoxData.Clear();
@@ -211,14 +216,22 @@ namespace JenkinsInterfaceTest
             richTextBoxData.AppendText(texttoadd2);
             richTextBoxData.AppendText(result.ToString());
             return result.ToString();
-
         }
         private void buttonLoadSite_Click(object sender, EventArgs e)
         {
             richTextBoxData.Clear();
             string uridata  = textBoxFinalString.Text;
             string foo = string.Format("curl -X POST -L --user {0}:{1} {2} >> temp2.xml", textBoxUserName.Text, textBoxToken.Text, uridata);
-            var temp = runcommand(foo);
+            try
+            {
+                // if you want to catch the string returned and bubble up to a textbox etc.. eazy peazy, catch and send it to richTextBoxData.text. done
+                string temp = runcommand(foo);
+                richTextBoxData.Text= temp;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
             richTextBoxData.AppendText(foo);
 
         }      
@@ -246,8 +259,8 @@ namespace JenkinsInterfaceTest
         {
             
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "HTML Pafe|*.html|XML Page|*.xml|Text Page|*.txt";
-            saveFileDialog1.Title = "Save an returned info to a File";
+            saveFileDialog1.Filter = "HTML|*.html|XML|*.xml|Text|*.txt";
+            saveFileDialog1.Title = "Save the returned info to a File";
             saveFileDialog1.FileName = textBoxFileName.Text;
             
             saveFileDialog1.CheckPathExists = true;
@@ -296,6 +309,7 @@ namespace JenkinsInterfaceTest
         }
         private void ProcessLastBuildData(string filename)
         {
+            if (string.IsNullOrEmpty(filename)) return;
             DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             ds.Tables.Add(dt);
@@ -358,6 +372,7 @@ namespace JenkinsInterfaceTest
         }
         private void ProcessAgentInfo(string filename)
         {
+            if (string.IsNullOrEmpty(filename)) return;
             DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             ds.Tables.Add(dt);
@@ -419,6 +434,7 @@ namespace JenkinsInterfaceTest
         }
         private void ProcessRunData( string filename)
         {
+            if (string.IsNullOrEmpty(filename)) return;
             DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             ds.Tables.Add(dt);
@@ -465,8 +481,8 @@ namespace JenkinsInterfaceTest
                         rr.Url = nod.InnerText;
                         break;
                     case "timestamp":
-                        DateTime result = DateTime.Parse(nod.InnerText);
-                        rr.DT  = result;
+                       // DateTime result = DateTime.Parse(nod.InnerText);
+                        //rr.DT  = DateTime.Now(;
                         break;
                     default:
                         break;
@@ -493,6 +509,7 @@ namespace JenkinsInterfaceTest
         }
         private void ProcessDetailedRunData(string filename)
         {
+            if (string.IsNullOrEmpty(filename)) return;
             DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             ds.Tables.Add(dt);
@@ -536,6 +553,7 @@ namespace JenkinsInterfaceTest
         }
         private void ProcessDetailedProjectData(string filename)
         {
+            if (string.IsNullOrEmpty(filename)) return;
             DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             ds.Tables.Add(dt);
@@ -571,11 +589,16 @@ namespace JenkinsInterfaceTest
             } // end for each now load line for dataset.
             for (int i = 0; i < runIDs.Count; i++)
             {
-                //var tetst = HttpUtility.UrlPathEncode(runIDs[i].ToString());
-                //string tempwebUrl = string.Format("{0}", HttpUtility.UrlPathEncode(runIDs[i].ToString()));
                 dt.Rows.Add(runName, fullName, runIDs[i], HttpUtility.UrlPathEncode(runUrls[i].ToString()));
             }
-            dataGridViewValues.DataSource = ds.Tables[0];
+            if (ds.Tables.Count <= 0)
+            {
+                // empty do not fill
+            }
+            else
+            {
+                dataGridViewValues.DataSource = ds.Tables[0];
+            }
         }
         private void buttonSaveCOnfig_Click(object sender, EventArgs e)
         {
@@ -612,19 +635,29 @@ namespace JenkinsInterfaceTest
                 {
                     sitepathitemstosave = string.Format("{0};{1}", sitepathitemstosave, item);
                 }
-            }
-        
+            }        
             aid.defaultsitepath = sitepathitemstosave;
-            if (File.Exists(settings.ConfigFile))
+
+
+            // noiw write to disk and archive old, but only one old, delete anything older
+            try
             {
-                string tempfilename = string.Format("old_{0}", settings.ConfigFile);
-                if (File.Exists(tempfilename))
+                if (File.Exists(settings.ConfigFile))
                 {
-                    File.Delete(tempfilename);
+                    string tempfilename = string.Format("old_{0}", settings.ConfigFile);
+                    if (File.Exists(tempfilename))
+                    {
+                        File.Delete(tempfilename);
+                    }
+                    File.Move(settings.ConfigFile, tempfilename);
                 }
-                File.Move(settings.ConfigFile, tempfilename);
+                aid.WriteToDisk(aid, settings.ConfigFile);
             }
-            aid.WriteToDisk(aid, settings.ConfigFile);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString()); ;
+            }
+           
         }
 
         private void buttonGetFIles_Click(object sender, EventArgs e)
@@ -639,12 +672,10 @@ namespace JenkinsInterfaceTest
             comboBoxXMLFiles.Items.AddRange(di.GetFiles("*.xml"));
         }
 
-
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MessageBox.Show("Saving Config Changes to disk.");
+            //MessageBox.Show("Saving Config Changes to disk.");
             saveConfigData();
-
         }
 
         private void buttonSaveToSQL_Click(object sender, EventArgs e)
@@ -696,36 +727,43 @@ namespace JenkinsInterfaceTest
             List<RunResults> rrl = new List<RunResults>();
             using (SqlCommand command = new SqlCommand(sqlCMD, connection))
             {
-                command.Connection.Open();
-                using (SqlDataReader oReader = command.ExecuteReader())
+                try
                 {
-                    while (oReader.Read())
+                    command.Connection.Open();
+                    using (SqlDataReader oReader = command.ExecuteReader())
                     {
-                        for (int i = 0; i < oReader.FieldCount; i++)
+                        while (oReader.Read())
                         {
-                            RunResults rr = new RunResults();
-                            bool tempresult = false;
-                            bool tempprog = false;
-                            rr.BuiltOn = oReader[4].ToString();
-                            rr.BuildNumMain = oReader[1].ToString();
-                            if (!oReader[2].ToString().ToLower().Equals("false"))
+                            for (int i = 0; i < oReader.FieldCount; i++)
                             {
-                                tempresult = true;
+                                RunResults rr = new RunResults();
+                                bool tempresult = false;
+                                bool tempprog = false;
+                                rr.BuiltOn = oReader[4].ToString();
+                                rr.BuildNumMain = oReader[1].ToString();
+                                if (!oReader[2].ToString().ToLower().Equals("false"))
+                                {
+                                    tempresult = true;
+                                }
+                                rr.result = tempresult;
+                                if (!oReader[3].ToString().ToLower().Equals("false"))
+                                {
+                                    tempprog = true;
+                                }
+                                rr.in_progress = tempprog;
+                                rr.url = oReader[5].ToString();
+                                rrl.Add(rr);
                             }
-                            rr.result = tempresult;
-                            if (!oReader[3].ToString().ToLower().Equals("false"))
-                            {
-                                tempprog = true;
-                            }
-                            rr.in_progress = tempprog;
-                            rr.url = oReader[5].ToString();
-                            rrl.Add(rr);
                         }
+                        command.Connection.Close();
                     }
-                    command.Connection.Close();
-
                 }
-                
+                catch (Exception ex)
+                {
+
+
+                    MessageBox.Show(ex.ToString()); ;
+                }              
             }
             return rrl;
         }
@@ -748,7 +786,6 @@ namespace JenkinsInterfaceTest
 
         private void buttonReadSql_Click(object sender, EventArgs e)
         {
-            dataGridViewValues.Rows.Clear();
             List<RunResults> RunResList = new List<RunResults>();
             SqlConnection connection = new SqlConnection(settings.ConnString);
             string sqlCMD = "SELECT [RunInfoID],[BuildId],[BuildingStill],[BuildResult],[JkAgntName],[JkURI]  FROM [dbo].[Build_Info]";
@@ -760,8 +797,6 @@ namespace JenkinsInterfaceTest
             }
             catch (Exception ex)
             {
-                // ...handle, rethrow. Also, you might want to catch
-                // more specific exceptions...
                 MessageBox.Show(ex.ToString());
             }
             finally
