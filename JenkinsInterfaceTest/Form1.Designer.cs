@@ -30,15 +30,12 @@
         {
             this.buttonAddSite = new System.Windows.Forms.Button();
             this.listBoxSiteList = new System.Windows.Forms.ListBox();
-            this.buttonRemSite = new System.Windows.Forms.Button();
             this.buttonLoadSite = new System.Windows.Forms.Button();
             this.textBoxSite = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.richTextBoxData = new System.Windows.Forms.RichTextBox();
             this.comboBoxSiteList = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.panelpassFail = new System.Windows.Forms.Panel();
             this.textBoxUserName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxToken = new System.Windows.Forms.TextBox();
@@ -61,18 +58,22 @@
             this.label10 = new System.Windows.Forms.Label();
             this.buttonSaveToSQL = new System.Windows.Forms.Button();
             this.buttonReadSql = new System.Windows.Forms.Button();
-            this.buttonSaveCOnfig = new System.Windows.Forms.Button();
+            this.buttonAddMaster = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewValues)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonAddSite
             // 
             this.buttonAddSite.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonAddSite.Location = new System.Drawing.Point(12, 306);
+            this.buttonAddSite.Location = new System.Drawing.Point(222, 58);
             this.buttonAddSite.Name = "buttonAddSite";
-            this.buttonAddSite.Size = new System.Drawing.Size(160, 31);
+            this.buttonAddSite.Size = new System.Drawing.Size(151, 25);
             this.buttonAddSite.TabIndex = 0;
-            this.buttonAddSite.Text = "Add Data";
+            this.buttonAddSite.Text = "Add Command";
             this.buttonAddSite.UseVisualStyleBackColor = true;
             this.buttonAddSite.Click += new System.EventHandler(this.buttonAddSite_Click);
             // 
@@ -82,24 +83,13 @@
             this.listBoxSiteList.ItemHeight = 15;
             this.listBoxSiteList.Location = new System.Drawing.Point(12, 73);
             this.listBoxSiteList.Name = "listBoxSiteList";
-            this.listBoxSiteList.Size = new System.Drawing.Size(703, 229);
+            this.listBoxSiteList.Size = new System.Drawing.Size(703, 214);
             this.listBoxSiteList.TabIndex = 1;
-            // 
-            // buttonRemSite
-            // 
-            this.buttonRemSite.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonRemSite.Location = new System.Drawing.Point(13, 340);
-            this.buttonRemSite.Name = "buttonRemSite";
-            this.buttonRemSite.Size = new System.Drawing.Size(97, 26);
-            this.buttonRemSite.TabIndex = 0;
-            this.buttonRemSite.Text = "Remove Data";
-            this.buttonRemSite.UseVisualStyleBackColor = true;
-            this.buttonRemSite.Click += new System.EventHandler(this.buttonRemSite_Click);
             // 
             // buttonLoadSite
             // 
             this.buttonLoadSite.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonLoadSite.Location = new System.Drawing.Point(935, 18);
+            this.buttonLoadSite.Location = new System.Drawing.Point(931, 9);
             this.buttonLoadSite.Name = "buttonLoadSite";
             this.buttonLoadSite.Size = new System.Drawing.Size(94, 55);
             this.buttonLoadSite.TabIndex = 0;
@@ -109,20 +99,20 @@
             // 
             // textBoxSite
             // 
-            this.textBoxSite.Location = new System.Drawing.Point(177, 318);
+            this.textBoxSite.Location = new System.Drawing.Point(19, 314);
             this.textBoxSite.Name = "textBoxSite";
-            this.textBoxSite.Size = new System.Drawing.Size(470, 23);
+            this.textBoxSite.Size = new System.Drawing.Size(421, 23);
             this.textBoxSite.TabIndex = 2;
             this.textBoxSite.Text = "job/Job_Build_Master_calc/api/xml";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(174, 303);
+            this.label1.Location = new System.Drawing.Point(36, 41);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(202, 15);
+            this.label1.Size = new System.Drawing.Size(291, 15);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Put link of site to add or remove here";
+            this.label1.Text = "Put link of master site or Jenkins commands add here.";
             // 
             // richTextBoxData
             // 
@@ -149,26 +139,9 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Site List";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(749, 67);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(39, 15);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Status";
-            // 
-            // panelpassFail
-            // 
-            //this.panelpassFail.Location = new System.Drawing.Point(749, 85);
-            ////this.panelpassFail.Name = "panelpassFail";
-            //this.panelpassFail.Size = new System.Drawing.Size(62, 55);
-            //this.panelpassFail.TabIndex = 7;
-            //this.panelpassFail.Paint += new System.Windows.Forms.PaintEventHandler(this.panelpassFail_Paint);
-            // 
             // textBoxUserName
             // 
-            this.textBoxUserName.Location = new System.Drawing.Point(790, 188);
+            this.textBoxUserName.Location = new System.Drawing.Point(788, 73);
             this.textBoxUserName.Name = "textBoxUserName";
             this.textBoxUserName.Size = new System.Drawing.Size(239, 23);
             this.textBoxUserName.TabIndex = 9;
@@ -176,7 +149,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(719, 191);
+            this.label4.Location = new System.Drawing.Point(717, 76);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 15);
             this.label4.TabIndex = 10;
@@ -184,7 +157,7 @@
             // 
             // textBoxToken
             // 
-            this.textBoxToken.Location = new System.Drawing.Point(790, 215);
+            this.textBoxToken.Location = new System.Drawing.Point(788, 100);
             this.textBoxToken.Name = "textBoxToken";
             this.textBoxToken.Size = new System.Drawing.Size(239, 23);
             this.textBoxToken.TabIndex = 9;
@@ -192,7 +165,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(719, 218);
+            this.label5.Location = new System.Drawing.Point(717, 103);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(64, 15);
             this.label5.TabIndex = 10;
@@ -201,7 +174,7 @@
             // buttonAuth
             // 
             this.buttonAuth.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonAuth.Location = new System.Drawing.Point(818, 85);
+            this.buttonAuth.Location = new System.Drawing.Point(719, 9);
             this.buttonAuth.Name = "buttonAuth";
             this.buttonAuth.Size = new System.Drawing.Size(211, 55);
             this.buttonAuth.TabIndex = 8;
@@ -212,9 +185,9 @@
             // textBoxFinalString
             // 
             this.textBoxFinalString.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxFinalString.Location = new System.Drawing.Point(73, 9);
+            this.textBoxFinalString.Location = new System.Drawing.Point(63, 10);
             this.textBoxFinalString.Name = "textBoxFinalString";
-            this.textBoxFinalString.Size = new System.Drawing.Size(753, 29);
+            this.textBoxFinalString.Size = new System.Drawing.Size(574, 29);
             this.textBoxFinalString.TabIndex = 2;
             this.textBoxFinalString.WordWrap = false;
             // 
@@ -230,7 +203,7 @@
             // buttonPreLoad
             // 
             this.buttonPreLoad.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonPreLoad.Location = new System.Drawing.Point(825, 8);
+            this.buttonPreLoad.Location = new System.Drawing.Point(637, 10);
             this.buttonPreLoad.Name = "buttonPreLoad";
             this.buttonPreLoad.Size = new System.Drawing.Size(79, 30);
             this.buttonPreLoad.TabIndex = 0;
@@ -241,9 +214,9 @@
             // buttonLoadFile
             // 
             this.buttonLoadFile.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonLoadFile.Location = new System.Drawing.Point(840, 323);
+            this.buttonLoadFile.Location = new System.Drawing.Point(850, 310);
             this.buttonLoadFile.Name = "buttonLoadFile";
-            this.buttonLoadFile.Size = new System.Drawing.Size(189, 25);
+            this.buttonLoadFile.Size = new System.Drawing.Size(171, 25);
             this.buttonLoadFile.TabIndex = 0;
             this.buttonLoadFile.Text = "Load XML into gridview -->";
             this.buttonLoadFile.UseVisualStyleBackColor = true;
@@ -252,7 +225,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(16, 389);
+            this.label8.Location = new System.Drawing.Point(607, 368);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(126, 15);
             this.label8.TabIndex = 10;
@@ -266,7 +239,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(338, 384);
+            this.button1.Location = new System.Drawing.Point(929, 363);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(94, 24);
             this.button1.TabIndex = 0;
@@ -276,7 +249,7 @@
             // 
             // textBoxFileName
             // 
-            this.textBoxFileName.Location = new System.Drawing.Point(143, 385);
+            this.textBoxFileName.Location = new System.Drawing.Point(734, 364);
             this.textBoxFileName.Name = "textBoxFileName";
             this.textBoxFileName.Size = new System.Drawing.Size(196, 23);
             this.textBoxFileName.TabIndex = 11;
@@ -304,15 +277,15 @@
             this.comboBoxXMLFiles.FormattingEnabled = true;
             this.comboBoxXMLFiles.Items.AddRange(new object[] {
             "C:\\temp\\33TestFile.xml"});
-            this.comboBoxXMLFiles.Location = new System.Drawing.Point(180, 349);
+            this.comboBoxXMLFiles.Location = new System.Drawing.Point(483, 338);
             this.comboBoxXMLFiles.Name = "comboBoxXMLFiles";
-            this.comboBoxXMLFiles.Size = new System.Drawing.Size(849, 23);
+            this.comboBoxXMLFiles.Size = new System.Drawing.Size(538, 23);
             this.comboBoxXMLFiles.TabIndex = 5;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(698, 333);
+            this.label7.Location = new System.Drawing.Point(94, 24);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(90, 15);
             this.label7.TabIndex = 10;
@@ -322,7 +295,7 @@
             // buttonGetFIles
             // 
             this.buttonGetFIles.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonGetFIles.Location = new System.Drawing.Point(689, 307);
+            this.buttonGetFIles.Location = new System.Drawing.Point(640, 312);
             this.buttonGetFIles.Name = "buttonGetFIles";
             this.buttonGetFIles.Size = new System.Drawing.Size(137, 25);
             this.buttonGetFIles.TabIndex = 0;
@@ -333,7 +306,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(717, 375);
+            this.label9.Location = new System.Drawing.Point(449, 389);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(289, 15);
             this.label9.TabIndex = 10;
@@ -343,7 +316,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(434, 389);
+            this.label10.Location = new System.Drawing.Point(791, 389);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(232, 15);
             this.label10.TabIndex = 10;
@@ -353,7 +326,7 @@
             // buttonSaveToSQL
             // 
             this.buttonSaveToSQL.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonSaveToSQL.Location = new System.Drawing.Point(869, 288);
+            this.buttonSaveToSQL.Location = new System.Drawing.Point(809, 234);
             this.buttonSaveToSQL.Name = "buttonSaveToSQL";
             this.buttonSaveToSQL.Size = new System.Drawing.Size(137, 29);
             this.buttonSaveToSQL.TabIndex = 0;
@@ -364,7 +337,7 @@
             // buttonReadSql
             // 
             this.buttonReadSql.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonReadSql.Location = new System.Drawing.Point(869, 244);
+            this.buttonReadSql.Location = new System.Drawing.Point(809, 205);
             this.buttonReadSql.Name = "buttonReadSql";
             this.buttonReadSql.Size = new System.Drawing.Size(137, 29);
             this.buttonReadSql.TabIndex = 0;
@@ -372,17 +345,38 @@
             this.buttonReadSql.UseVisualStyleBackColor = true;
             this.buttonReadSql.Click += new System.EventHandler(this.buttonReadSql_Click);
             // 
-            // buttonSaveCOnfig
+            // buttonAddMaster
             // 
-            this.buttonSaveCOnfig.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonSaveCOnfig.Location = new System.Drawing.Point(790, 153);
-            this.buttonSaveCOnfig.Name = "buttonSaveCOnfig";
-            this.buttonSaveCOnfig.Size = new System.Drawing.Size(137, 29);
-            this.buttonSaveCOnfig.TabIndex = 0;
-            this.buttonSaveCOnfig.Text = "Save Config";
-            this.buttonSaveCOnfig.UseVisualStyleBackColor = true;
-            this.buttonSaveCOnfig.Visible = false;
-            this.buttonSaveCOnfig.Click += new System.EventHandler(this.buttonSaveCOnfig_Click);
+            this.buttonAddMaster.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonAddMaster.Location = new System.Drawing.Point(36, 58);
+            this.buttonAddMaster.Name = "buttonAddMaster";
+            this.buttonAddMaster.Size = new System.Drawing.Size(129, 25);
+            this.buttonAddMaster.TabIndex = 0;
+            this.buttonAddMaster.Text = "Add Jkns Master";
+            this.buttonAddMaster.UseVisualStyleBackColor = true;
+            this.buttonAddMaster.Click += new System.EventHandler(this.buttonAddMaster_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.buttonAddSite);
+            this.groupBox1.Controls.Add(this.buttonAddMaster);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(11, 296);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(435, 87);
+            this.groupBox1.TabIndex = 13;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Jenkins Controls";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Location = new System.Drawing.Point(446, 296);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(583, 112);
+            this.groupBox2.TabIndex = 4;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "File Controls";
             // 
             // MainForm
             // 
@@ -391,7 +385,6 @@
             this.ClientSize = new System.Drawing.Size(1899, 811);
             this.Controls.Add(this.dataGridViewValues);
             this.Controls.Add(this.textBoxFileName);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label8);
@@ -400,14 +393,11 @@
             this.Controls.Add(this.textBoxToken);
             this.Controls.Add(this.textBoxUserName);
             this.Controls.Add(this.buttonAuth);
-            this.Controls.Add(this.panelpassFail);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBoxXMLFiles);
             this.Controls.Add(this.comboBoxSiteList);
             this.Controls.Add(this.richTextBoxData);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxFinalString);
             this.Controls.Add(this.textBoxSite);
             this.Controls.Add(this.listBoxSiteList);
@@ -415,16 +405,19 @@
             this.Controls.Add(this.buttonLoadSite);
             this.Controls.Add(this.buttonReadSql);
             this.Controls.Add(this.buttonSaveToSQL);
-            this.Controls.Add(this.buttonSaveCOnfig);
             this.Controls.Add(this.buttonGetFIles);
             this.Controls.Add(this.buttonLoadFile);
             this.Controls.Add(this.buttonPreLoad);
-            this.Controls.Add(this.buttonRemSite);
-            this.Controls.Add(this.buttonAddSite);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBox2);
             this.Name = "MainForm";
             this.Text = "Jenkins Test";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewValues)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -434,15 +427,12 @@
 
         private System.Windows.Forms.Button buttonAddSite;
         private System.Windows.Forms.ListBox listBoxSiteList;
-        private System.Windows.Forms.Button buttonRemSite;
         private System.Windows.Forms.Button buttonLoadSite;
         private System.Windows.Forms.TextBox textBoxSite;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox richTextBoxData;
         private System.Windows.Forms.ComboBox comboBoxSiteList;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Panel panelpassFail;
         private System.Windows.Forms.TextBox textBoxUserName;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxToken;
@@ -465,6 +455,8 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button buttonSaveToSQL;
         private System.Windows.Forms.Button buttonReadSql;
-        private System.Windows.Forms.Button buttonSaveCOnfig;
+        private System.Windows.Forms.Button buttonAddMaster;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }

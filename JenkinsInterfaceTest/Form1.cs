@@ -29,7 +29,6 @@ namespace JenkinsInterfaceTest
             {
                 comboBoxXMLFiles.SelectedIndex = 0;
             }
-            panelpassFail.BackColor = Color.Green;
            
         }
 
@@ -797,6 +796,11 @@ namespace JenkinsInterfaceTest
             {
                 connection.Close();
             }
+        }
+
+        private void buttonAddMaster_Click(object sender, EventArgs e)
+        {
+
         }
 
         //private void panelpassFail_Paint(object sender, PaintEventArgs e)
