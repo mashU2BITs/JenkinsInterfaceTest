@@ -56,12 +56,12 @@
             this.dataGridViewValues = new System.Windows.Forms.DataGridView();
             this.comboBoxXMLFiles = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.buttonSaveCOnfig = new System.Windows.Forms.Button();
             this.buttonGetFIles = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.buttonSaveToSQL = new System.Windows.Forms.Button();
             this.buttonReadSql = new System.Windows.Forms.Button();
+            this.buttonSaveCOnfig = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewValues)).BeginInit();
             this.SuspendLayout();
             // 
@@ -160,10 +160,11 @@
             // 
             // panelpassFail
             // 
-            this.panelpassFail.Location = new System.Drawing.Point(749, 85);
-            this.panelpassFail.Name = "panelpassFail";
-            this.panelpassFail.Size = new System.Drawing.Size(62, 55);
-            this.panelpassFail.TabIndex = 7;
+            //this.panelpassFail.Location = new System.Drawing.Point(749, 85);
+            ////this.panelpassFail.Name = "panelpassFail";
+            //this.panelpassFail.Size = new System.Drawing.Size(62, 55);
+            //this.panelpassFail.TabIndex = 7;
+            //this.panelpassFail.Paint += new System.Windows.Forms.PaintEventHandler(this.panelpassFail_Paint);
             // 
             // textBoxUserName
             // 
@@ -318,17 +319,6 @@
             this.label7.Text = "List of XML files";
             this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
-            // buttonSaveCOnfig
-            // 
-            this.buttonSaveCOnfig.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonSaveCOnfig.Location = new System.Drawing.Point(790, 153);
-            this.buttonSaveCOnfig.Name = "buttonSaveCOnfig";
-            this.buttonSaveCOnfig.Size = new System.Drawing.Size(137, 29);
-            this.buttonSaveCOnfig.TabIndex = 0;
-            this.buttonSaveCOnfig.Text = "Save Config";
-            this.buttonSaveCOnfig.UseVisualStyleBackColor = true;
-            this.buttonSaveCOnfig.Click += new System.EventHandler(this.buttonSaveCOnfig_Click);
-            // 
             // buttonGetFIles
             // 
             this.buttonGetFIles.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -345,9 +335,9 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(717, 375);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(310, 15);
+            this.label9.Size = new System.Drawing.Size(289, 15);
             this.label9.TabIndex = 10;
-            this.label9.Text = "File Name must contain \'agent,run,detailedjob,rundetails\'";
+            this.label9.Text = "File Name must contain \'Projects, Agents, Job or Run\'";
             this.label9.Click += new System.EventHandler(this.label7_Click);
             // 
             // label10
@@ -381,6 +371,18 @@
             this.buttonReadSql.Text = "Sql Read";
             this.buttonReadSql.UseVisualStyleBackColor = true;
             this.buttonReadSql.Click += new System.EventHandler(this.buttonReadSql_Click);
+            // 
+            // buttonSaveCOnfig
+            // 
+            this.buttonSaveCOnfig.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonSaveCOnfig.Location = new System.Drawing.Point(790, 153);
+            this.buttonSaveCOnfig.Name = "buttonSaveCOnfig";
+            this.buttonSaveCOnfig.Size = new System.Drawing.Size(137, 29);
+            this.buttonSaveCOnfig.TabIndex = 0;
+            this.buttonSaveCOnfig.Text = "Save Config";
+            this.buttonSaveCOnfig.UseVisualStyleBackColor = true;
+            this.buttonSaveCOnfig.Visible = false;
+            this.buttonSaveCOnfig.Click += new System.EventHandler(this.buttonSaveCOnfig_Click);
             // 
             // MainForm
             // 
@@ -458,11 +460,11 @@
         private System.Windows.Forms.DataGridView dataGridViewValues;
         private System.Windows.Forms.ComboBox comboBoxXMLFiles;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button buttonSaveCOnfig;
         private System.Windows.Forms.Button buttonGetFIles;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button buttonSaveToSQL;
         private System.Windows.Forms.Button buttonReadSql;
+        private System.Windows.Forms.Button buttonSaveCOnfig;
     }
 }

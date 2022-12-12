@@ -1,5 +1,4 @@
-﻿using JenkinsInterfaceTest.Properties;
-using System;
+﻿using System;
 using System.Collections.Generic; 
 using System.Data;
 using System.Diagnostics;
@@ -7,16 +6,11 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Data.SqlClient;
-using System.Data;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Web;
-using System.Reflection.Metadata.Ecma335;
-using System.Xml.Linq;
-
-//using BaseClassNameSpace.Web.BaseServices;
 
 namespace JenkinsInterfaceTest
 {
@@ -804,6 +798,11 @@ namespace JenkinsInterfaceTest
                 connection.Close();
             }
         }
+
+        //private void panelpassFail_Paint(object sender, PaintEventArgs e)
+        //{
+
+        //}
     }
 }
 
